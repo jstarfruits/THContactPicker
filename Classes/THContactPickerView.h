@@ -22,6 +22,7 @@
 
 @interface THContactPickerView : UIView <UITextViewDelegate, THContactViewDelegate, UIScrollViewDelegate, UITextInputTraits>
 
+@property (nonatomic, readonly) THContactTextField *textField;
 @property (nonatomic, strong) THContactView *selectedContactView;
 @property (nonatomic, assign) IBOutlet id <THContactPickerDelegate>delegate;
 
