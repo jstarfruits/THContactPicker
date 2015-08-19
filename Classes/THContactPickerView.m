@@ -147,6 +147,10 @@
 
 - (void)addContact:(id)contact withName:(NSString *)name {
     id contactKey = [NSValue valueWithNonretainedObject:contact];
+	[self addContact:contact identifier:contactKey withName:name];
+}
+
+- (void)addContact:(id)contact identifier:(NSString *)contactKey withName:(NSString *)name {
     if ([self.contactKeys containsObject:contactKey]){
         NSLog(@"Cannot add the same object twice to ContactPickerView");
         return;
@@ -209,6 +213,10 @@
   
     self.textField.hidden = NO;
     self.textField.text = @"";
+}
+
+- (void)removeContactByIdentifier:(NSString *)identifier {
+	[self removeContactByKey:identifier];
 }
 
 - (void)removeContact:(id)contact {
