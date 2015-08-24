@@ -197,12 +197,12 @@ NSString *THContactPickerContactCellReuseID = @"THContactPickerContactCell";
     if ([self.privateSelectedContacts containsObject:contact]){ // contact is already selected so remove it from ContactPickerView
         cell.accessoryType = UITableViewCellAccessoryNone;
         [self.privateSelectedContacts removeObject:contact];
-        [self.contactPickerView removeContact:contact];
+      // [self.contactPickerView removeContact:contact];
     } else {
         // Contact has not been selected, add it to THContactPickerView
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [self.privateSelectedContacts addObject:contact];
-        [self.contactPickerView addContact:contact withName:contactTilte];
+//       / [self.contactPickerView addContact:contact withName:contactTilte];
     }
     
     self.filteredContacts = self.contacts;
@@ -241,7 +241,7 @@ NSString *THContactPickerContactCellReuseID = @"THContactPickerContactCell";
 	if (textField.text.length > 0){
 		NSString *contact = [[NSString alloc] initWithString:textField.text];
 		[self.privateSelectedContacts addObject:contact];
-		[self.contactPickerView addContact:contact withName:textField.text];
+//		[self.contactPickerView addContact:contact withName:textField.text];
 	}
 	return YES;
 }

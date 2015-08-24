@@ -145,12 +145,11 @@
     [super setBackgroundColor:backgroundColor];
 }
 
-- (void)addContact:(id)contact withName:(NSString *)name {
-    id contactKey = [NSValue valueWithNonretainedObject:contact];
-	[self addContact:contact identifier:contactKey withName:name];
+- (void)addContact:(id)contact identifier:(NSString *)identifier withName:(NSString *)name {
+	[self addContactIdentifier:identifier withName:name];
 }
 
-- (void)addContact:(id)contact identifier:(NSString *)contactKey withName:(NSString *)name {
+- (void)addContactIdentifier:(NSString *)contactKey withName:(NSString *)name {
     if ([self.contactKeys containsObject:contactKey]){
         NSLog(@"Cannot add the same object twice to ContactPickerView");
         return;
@@ -294,17 +293,17 @@
 }
 
 - (void)removeContactView:(THContactView *)contactView {
-    id contact = [self contactForContactView:contactView];
+    id key = [self contactKeyForContactView:contactView];
     
-    if (contact == nil){
+    if (key == nil){
         return;
     }
-    
-    if ([self.delegate respondsToSelector:@selector(contactPickerDidRemoveContact:)]){
-        [self.delegate contactPickerDidRemoveContact:[contact nonretainedObjectValue]];
-    }
-    
-    [self removeContactByKey:contact];
+	
+	if ([self.delegate respondsToSelector:@selector(contactPickerDidRemoveContactIdentifier:)]){
+		[self.delegate contactPickerDidRemoveContactIdentifier:key];
+	}
+	
+    [self removeContactByKey:key];
     [self selectTextView];
 
     if (self.selectedContactView == contactView) {
@@ -334,7 +333,7 @@
 	}];
 }
 
-- (id)contactForContactView:(THContactView *)contactView {
+- (id)contactKeyForContactView:(THContactView *)contactView {
     NSArray *keys = [self.contacts allKeys];
     
     for (id contact in keys){

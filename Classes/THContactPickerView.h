@@ -14,7 +14,7 @@
 @protocol THContactPickerDelegate <NSObject>
 
 - (void)contactPickerTextViewDidChange:(NSString *)textViewText;
-- (void)contactPickerDidRemoveContact:(id)contact;
+- (void)contactPickerDidRemoveContactIdentifier:(NSString *)identifier;
 - (void)contactPickerDidResize:(THContactPickerView *)contactPickerView;
 - (BOOL)contactPickerTextFieldShouldReturn:(UITextField *)textField;
 
@@ -31,10 +31,10 @@
 @property (nonatomic, assign) NSInteger maxNumberOfLines;	// maximum number of lines the view will display before scrolling
 @property (nonatomic, strong) UIFont *font;
 
+// @dupricated
 - (void)addContact:(id)contact identifier:(NSString *)identifier withName:(NSString *)name;
+- (void)addContactIdentifier:(NSString *)identifier withName:(NSString *)name;
 - (void)removeContactByIdentifier:(NSString *)identifier;
-- (void)addContact:(id)contact withName:(NSString *)name;
-- (void)removeContact:(id)contact;
 - (void)removeAllContacts;
 - (BOOL)resignFirstResponder;
 
